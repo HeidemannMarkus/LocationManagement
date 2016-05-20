@@ -24,12 +24,12 @@ namespace ProcessHardwareLocations
           return returnModel;
        }
 
-       public List<IProcessHardwareLocations> GetHardware(string buildingName, string roomName)
+       public List<IHardware> GetHardware(string buildingName, string roomName)
        {
-          
+          throw new NotImplementedException();
        }
 
-       public List<IProcessHardwareLocations> GetHardware()
+       public List<IHardware> GetHardware()
        {
           throw new NotImplementedException();
        }
