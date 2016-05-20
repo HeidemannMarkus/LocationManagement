@@ -19,9 +19,34 @@ namespace WpfApplication1
    /// </summary>
    public partial class MainWindow : Window
    {
-      public MainWindow()
-      {
-         InitializeComponent();
-      }
+       public MainWindow()
+       {
+           InitializeComponent();
+       }
+
+       private void BtnEdit_Click(object sender, RoutedEventArgs e)
+       {
+
+       }
+
+       private void BtnDelete_Click(object sender, RoutedEventArgs e)
+       {
+
+       }
+
+       private void BtnAdd_Click(object sender, RoutedEventArgs e)
+       {
+
+       }
+
+       private void BtnSave_Click(object sender, RoutedEventArgs e)
+       {
+
+       }
+
+       private void BtnRead_Click(object sender, RoutedEventArgs e)
+       {
+
+       }
    }
 }
