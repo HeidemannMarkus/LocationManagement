@@ -31,7 +31,7 @@ namespace ProcessHardwareLocations
 
        public List<IHardware> GetHardware()
        {
-          throw new NotImplementedException();
+          return HardWareList;
        }
 
        public IResult LoadHardware(string filepath)
