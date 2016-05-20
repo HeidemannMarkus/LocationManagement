@@ -45,22 +45,6 @@ namespace ProcessHardwareLocations
          {
                 case ".dat":
                     loaded_Hardware = new BinaryParser().FromFile<Dictionary<Guid, IHardware>>(filepath);
-                    foreach (var hardware in loaded_Hardware)
-                    {
-                        if (!HardWareList.ContainsKey(hardware.Key))
-                        {
-                            HardWareList.Add(hardware.Key, hardware.Value);
-                        }
-                        else
-                        {
-                            if (HardWareList[hardware.Key] != hardware.Value)
-                            {
-                                resultModel.HasError = true;
-                                //TODO: ErrorMessage durch Liste ersetzen, damit n Fehlermeldungen zurückgegeben werden können
-                                resultModel.ErrorMessage += $",{hardware.Key} ist schon vorhanden";
-                            }
-                        }
-                    }
                     break;
                 case ".xml":
                new XmlParser().FromFile<Dictionary<Guid, IHardware>>(filepath);
@@ -75,8 +59,24 @@ namespace ProcessHardwareLocations
                resultModel.HasError = true;
                resultModel.ErrorMessage ="Format Unbekannt!!!!";
                break;
-         }
-          return resultModel;
+            }
+            foreach (var hardware in loaded_Hardware)
+            {
+                if (!HardWareList.ContainsKey(hardware.Key))
+                {
+                    HardWareList.Add(hardware.Key, hardware.Value);
+                }
+                else
+                {
+                    if (HardWareList[hardware.Key] != hardware.Value)
+                    {
+                        resultModel.HasError = true;
+                        //TODO: ErrorMessage durch Liste ersetzen, damit n Fehlermeldungen zurückgegeben werden können
+                        resultModel.ErrorMessage += $",{hardware.Key} ist schon vorhanden";
+                    }
+                }
+            }
+            return resultModel;
        }
 
        public IResult UpdateHardware(IHardware updatedHardware)
