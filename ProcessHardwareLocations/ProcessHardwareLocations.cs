@@ -40,10 +40,11 @@ namespace ProcessHardwareLocations
        public IResult LoadHardware(string filepath)
        {
          var resultModel = new Result();
+         var loaded_Hardware = new Dictionary<Guid, IHardware>();
          switch (Path.GetExtension(filepath))
          {
                 case ".dat":
-                    var loaded_Hardware = new BinaryParser().FromFile<Dictionary<Guid, IHardware>>(filepath);
+                    loaded_Hardware = new BinaryParser().FromFile<Dictionary<Guid, IHardware>>(filepath);
                     foreach (var hardware in loaded_Hardware)
                     {
                         if (!HardWareList.ContainsKey(hardware.Key))
