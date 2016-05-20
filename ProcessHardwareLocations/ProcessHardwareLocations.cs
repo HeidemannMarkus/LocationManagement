@@ -63,13 +63,13 @@ namespace ProcessHardwareLocations
                     }
                     break;
                 case ".xml":
-               new XmlParser().FromFile<IHardware>(filepath);
+               new XmlParser().FromFile<Dictionary<Guid, IHardware>>(filepath);
                break;
             case ".json":
-               new JsonParser().FromFile<IHardware>(filepath);
+               new JsonParser().FromFile<Dictionary<Guid, IHardware>>(filepath);
                break;
             case ".csv":
-               new CsvParser().FromFile<IHardware>(filepath);
+               new CsvParser().FromFile<Dictionary<Guid, IHardware>>(filepath);
                break;
             default:
                resultModel.HasError = true;
