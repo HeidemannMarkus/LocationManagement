@@ -84,7 +84,14 @@ namespace ProcessHardwareLocations
 
        public IResult DeleteHardware(Guid hardware_ID)
        {
-          throw new NotImplementedException();
+         var resultModel = new Result();
+         if (!HardWareList.Remove(hardware_ID))
+         {
+            resultModel.HasError = true;
+            resultModel.ErrorMessage = "Entfernen Fehlgeschlagen";
+         }
+
+          return resultModel;
        }
     }
 }
