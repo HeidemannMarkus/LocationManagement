@@ -32,10 +32,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="FileHelpers">
-      <HintPath>..\..\Libs\FileHelpers.dll</HintPath>
+      <HintPath>..\Libs\FileHelpers.dll</HintPath>
     </Reference>
     <Reference Include="ParserLibrary">
-      <HintPath>..\..\Libs\ParserLibrary.dll</HintPath>
+      <HintPath>..\Libs\ParserLibrary.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
