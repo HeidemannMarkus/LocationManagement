@@ -42,10 +42,26 @@ namespace ProcessHardwareLocations
          var resultModel = new Result();
          switch (Path.GetExtension(filepath))
          {
-            case ".dat":
-               new BinaryParser().FromFile<IHardware>(filepath);
-               break;
-            case ".xml":
+                case ".dat":
+                    var loaded_Hardware = new BinaryParser().FromFile<Dictionary<Guid, IHardware>>(filepath);
+                    foreach (var hardware in loaded_Hardware)
+                    {
+                        if (!HardWareList.ContainsKey(hardware.Key))
+                        {
+                            HardWareList.Add(hardware.Key, hardware.Value);
+                        }
+                        else
+                        {
+                            if (HardWareList[hardware.Key] != hardware.Value)
+                            {
+                                resultModel.HasError = true;
+                                //TODO: ErrorMessage durch Liste ersetzen, damit n Fehlermeldungen zurückgegeben werden können
+                                resultModel.ErrorMessage += $",{hardware.Key} ist schon vorhanden";
+                            }
+                        }
+                    }
+                    break;
+                case ".xml":
                new XmlParser().FromFile<IHardware>(filepath);
                break;
             case ".json":
