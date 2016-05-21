@@ -47,13 +47,13 @@ namespace ProcessHardwareLocations
                     loaded_Hardware = new BinaryParser().FromFile<Dictionary<Guid, IHardware>>(filepath);
                     break;
                 case ".xml":
-               new XmlParser().FromFile<Dictionary<Guid, IHardware>>(filepath);
+                    loaded_Hardware = new XmlParser().FromFile<Dictionary<Guid, IHardware>>(filepath);
                break;
             case ".json":
-               new JsonParser().FromFile<Dictionary<Guid, IHardware>>(filepath);
+                    loaded_Hardware = new JsonParser().FromFile<Dictionary<Guid, IHardware>>(filepath);
                break;
             case ".csv":
-               new CsvParser().FromFile<Dictionary<Guid, IHardware>>(filepath);
+                    loaded_Hardware = new CsvParser().FromFile<Dictionary<Guid, IHardware>>(filepath).Single();
                break;
             default:
                resultModel.HasError = true;
