@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\Hardware.cs" />
     <Compile Include="Data\IHardware.cs" />
     <Compile Include="Data\Switch.cs" />
     <Compile Include="IProcessHardwareLocations.cs" />
