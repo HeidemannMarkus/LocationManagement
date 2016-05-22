@@ -94,6 +94,12 @@
     </None>
     <AppDesigner Include="Properties\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ProcessHardwareLocations\ProcessHardwareLocations.csproj">
+      <Project>{9872d40e-a648-42fe-8fe8-af4de56419b1}</Project>
+      <Name>ProcessHardwareLocationsProject</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
