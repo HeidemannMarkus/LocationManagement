@@ -96,8 +96,28 @@ namespace ProcessHardwareLocations
 
        public IResult SaveHardware(string filepath)
        {
-          throw new NotImplementedException();
-       }
+            var resultModel = new Result();
+            switch (Path.GetExtension(filepath))
+            {
+                case ".dat":
+                    new BinaryParser().ToFile(filepath, HardWareList);
+                    break;
+                case ".xml":
+                    new XmlParser().ToFile(filepath, HardWareList);
+                    break;
+                case ".json":
+                    new JsonParser().ToFile(filepath, HardWareList);
+                    break;
+                /*case ".csv":
+                    new CsvParser().ToFile(filepath, HardWareList.ToList());
+                    break;*/
+                default:
+                    resultModel.HasError = true;
+                    resultModel.ErrorMessage = $"format {Path.GetExtension(filepath)} wird nicht unterstützt";
+                    break;
+            }
+            return resultModel;
+        }
 
        public IResult DeleteHardware(Guid hardware_ID)
        {
