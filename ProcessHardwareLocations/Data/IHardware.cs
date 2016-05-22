@@ -7,5 +7,7 @@ namespace ProcessHardwareLocations.Data
         Guid Id { get; set; }
         string BuildingName { get; set; }
         string RoomName { get; set; }
+        string HardwareType { get; set; }
+        string HardwareName { get; set; }
    }
 }
