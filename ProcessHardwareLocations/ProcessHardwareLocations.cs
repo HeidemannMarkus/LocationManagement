@@ -40,26 +40,43 @@ namespace ProcessHardwareLocations
        public IResult LoadHardware(string filepath)
        {
          var resultModel = new Result();
+         var loaded_Hardware = new Dictionary<Guid, IHardware>();
          switch (Path.GetExtension(filepath))
          {
-            case ".dat":
-               new BinaryParser().FromFile<IHardware>(filepath);
-               break;
-            case ".xml":
-               new XmlParser().FromFile<IHardware>(filepath);
+                case ".dat":
+                    loaded_Hardware = new BinaryParser().FromFile<Dictionary<Guid, IHardware>>(filepath);
+                    break;
+                case ".xml":
+                    loaded_Hardware = new XmlParser().FromFile<Dictionary<Guid, IHardware>>(filepath);
                break;
             case ".json":
-               new JsonParser().FromFile<IHardware>(filepath);
+                    loaded_Hardware = new JsonParser().FromFile<Dictionary<Guid, IHardware>>(filepath);
                break;
             case ".csv":
-               new CsvParser().FromFile<IHardware>(filepath);
+                    loaded_Hardware = new CsvParser().FromFile<Dictionary<Guid, IHardware>>(filepath).Single();
                break;
             default:
                resultModel.HasError = true;
                resultModel.ErrorMessage ="Format Unbekannt!!!!";
                break;
-         }
-          return resultModel;
+            }
+            foreach (var hardware in loaded_Hardware)
+            {
+                if (!HardWareList.ContainsKey(hardware.Key))
+                {
+                    HardWareList.Add(hardware.Key, hardware.Value);
+                }
+                else
+                {
+                    if (HardWareList[hardware.Key] != hardware.Value)
+                    {
+                        resultModel.HasError = true;
+                        //TODO: ErrorMessage durch Liste ersetzen, damit n Fehlermeldungen zurückgegeben werden können
+                        resultModel.ErrorMessage += $",{hardware.Key} ist schon vorhanden";
+                    }
+                }
+            }
+            return resultModel;
        }
 
        public IResult UpdateHardware(IHardware updatedHardware)
