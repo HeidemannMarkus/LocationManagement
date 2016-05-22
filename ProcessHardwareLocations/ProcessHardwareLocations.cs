@@ -10,6 +10,11 @@ namespace ProcessHardwareLocations
     public class ProcessHardwareLocations : IProcessHardwareLocations
     {
        private Dictionary<Guid, IHardware> HardWareList { get; set; }
+
+        public ProcessHardwareLocations()
+        {
+            HardWareList = new Dictionary<Guid, IHardware>();
+        }
        public IResult CaptureHardware(IHardware newHardware)
        {
          var returnModel = new Result();
