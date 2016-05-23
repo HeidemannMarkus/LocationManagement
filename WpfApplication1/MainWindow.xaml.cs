@@ -2,6 +2,7 @@
 using ProcessHardwareLocations;
 using ProcessHardwareLocations.Data;
 using System.Windows;
+using System;
 
 
 namespace WpfApplication1
@@ -19,30 +20,48 @@ namespace WpfApplication1
         {
             _processHardware = new ProcessHardwareLocations.ProcessHardwareLocations();
             InitializeComponent();
-            // listViewHardware.Items[0].Selected = true;
         }
 
         private void BtnEdit_Click(object sender, RoutedEventArgs e)
         {
-            _processHardware.DeleteHardware(_selected.Id);
-
-            var temp = new Hardware
+            IResult iresult = _processHardware.DeleteHardware(_selected.Id);
+            if (iresult.HasError)
             {
-                HardwareType = TBArt.Text,
-                HardwareName = TBName.Text,
-                BuildingName = TBBuilding.Text,
-                RoomName = TBRoom.Text
-            };
-            _processHardware.CaptureHardware(temp);
-            listViewHardware.ItemsSource = _processHardware.GetHardware();
-            listViewHardware.Items.Refresh();
+                handleError(iresult.ErrorMessage);
+            }
+            else
+            {
+                var temp = new Hardware
+                {
+                    HardwareType = TBArt.Text,
+                    HardwareName = TBName.Text,
+                    BuildingName = TBBuilding.Text,
+                    RoomName = TBRoom.Text,
+                    FirstDate = (DateTime)DatePicker.SelectedDate
+                };
+                iresult = _processHardware.CaptureHardware(temp);
+                if (iresult.HasError)
+                {
+                    handleError(iresult.ErrorMessage);
+                }
+                else
+                {
+                    updateListView();
+                }
+            }
         }
 
         private void BtnDelete_Click(object sender, RoutedEventArgs e)
         {
-            _processHardware.DeleteHardware(_selected.Id);
-            listViewHardware.ItemsSource = _processHardware.GetHardware();
-            listViewHardware.Items.Refresh();
+            IResult iresult = _processHardware.DeleteHardware(_selected.Id);
+            if (iresult.HasError)
+            {
+                handleError(iresult.ErrorMessage);
+            }
+            else
+            {
+                updateListView();
+            }
         }
 
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
@@ -52,38 +71,62 @@ namespace WpfApplication1
                 HardwareType = TBArt.Text,
                 HardwareName = TBName.Text,
                 BuildingName = TBBuilding.Text,
-                RoomName = TBRoom.Text
+                RoomName = TBRoom.Text,
+                FirstDate = (DateTime)DatePicker.SelectedDate
             };
-            _processHardware.CaptureHardware(temp);
-            listViewHardware.ItemsSource = _processHardware.GetHardware();
-            listViewHardware.Items.Refresh();
+            IResult iresult = _processHardware.CaptureHardware(temp);
+            if (iresult.HasError)
+            {
+                handleError(iresult.ErrorMessage);
+            }
+            else
+            {
+                updateListView();
 
-            TBName.Clear();
-            TBArt.Clear();
-            TBBuilding.Clear();
-            TBRoom.Clear();
+                TBName.Clear();
+                TBArt.Clear();
+                TBBuilding.Clear();
+                TBRoom.Clear();
+                DatePicker.SelectedDate = DateTime.Today;
 
-            TBName.Focus();
+                TBName.Focus();
+            }
         }
 
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
+            IResult iresult = null;
             SaveFileDialog sfd = new SaveFileDialog();
             sfd.DefaultExt = ".xml";
             if (sfd.ShowDialog() == true)
             {
-                _processHardware.SaveHardware(sfd.FileName);
+                iresult = _processHardware.SaveHardware(sfd.FileName);
+                if (iresult.HasError)
+                {
+                    handleError(iresult.ErrorMessage);
+                }
             }
+            
         }
 
         private void BtnLoad_Click(object sender, RoutedEventArgs e)
         {
+            IResult iresult = null;
             OpenFileDialog ofd = new OpenFileDialog();
-            //ofd.Filter = "|*.dat;*.xml;*.csv;*.json;";
+            // TODO Dateifilter
+            ofd.Filter = "Loading files| *.dat; *.xml; *.csv; *.json";
             if (ofd.ShowDialog() == true)
             {
-                listViewHardware.ItemsSource = (HardwareList) _processHardware.LoadHardware(ofd.FileName);
-                listViewHardware.Items.Refresh();
+                iresult = _processHardware.LoadHardware(ofd.FileName);
+                if (iresult.HasError)
+                {
+                    handleError(iresult.ErrorMessage);
+                }
+                else
+                {
+                    listViewHardware.ItemsSource = (HardwareList)iresult;
+                    listViewHardware.Items.Refresh();
+                }
             }
             TBName.Focus();
         }
@@ -95,18 +138,34 @@ namespace WpfApplication1
             TBArt.Text = _selected.HardwareType;
             TBBuilding.Text = _selected.BuildingName;
             TBRoom.Text = _selected.RoomName;
+            DatePicker.SelectedDate = _selected.FirstDate;
         }
 
         private void CBbuilding_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-            listViewHardware.ItemsSource = _processHardware.GetHardware(CBbuilding.SelectedItem.ToString(), CBroom.SelectedItem.ToString());
-            listViewHardware.Items.Refresh();
+            getHardwareWithFilter();
         }
 
         private void CBroom_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
+            getHardwareWithFilter();
+        }
+
+        private void updateListView()
+        {
+            listViewHardware.ItemsSource = _processHardware.GetHardware();
+            listViewHardware.Items.Refresh();
+        }
+
+        private void getHardwareWithFilter()
+        {
             listViewHardware.ItemsSource = _processHardware.GetHardware(CBbuilding.SelectedItem.ToString(), CBroom.SelectedItem.ToString());
             listViewHardware.Items.Refresh();
+        }
+
+        private void handleError(string errMessage)
+        {
+            MessageBox.Show("Fehler", errMessage, MessageBoxButton.OK);
         }
     }
 }
