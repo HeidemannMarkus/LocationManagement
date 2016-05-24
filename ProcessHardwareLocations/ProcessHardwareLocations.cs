@@ -34,7 +34,7 @@ namespace ProcessHardwareLocations
 
        public List<Hardware> GetHardware(string buildingName, string roomName)
        {
-         return (HardwareList)HardWareList.Values.Where(query =>
+         return HardWareList.Values.Where(query =>
           (buildingName == null || query.BuildingName == buildingName)
           && 
           (roomName == null || query.RoomName == roomName)

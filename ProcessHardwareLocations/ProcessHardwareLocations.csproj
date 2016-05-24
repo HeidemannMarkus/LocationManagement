@@ -50,7 +50,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\Hardware.cs" />
-    <Compile Include="Data\HardwareList.cs" />
     <Compile Include="IProcessHardwareLocations.cs" />
     <Compile Include="IResult.cs" />
     <Compile Include="ProcessHardwareLocations.cs" />
