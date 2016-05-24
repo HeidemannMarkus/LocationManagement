@@ -48,7 +48,7 @@ namespace WpfApplication1
                 HardwareName = TBName.Text,
                 BuildingName = TBBuilding.Text,
                 RoomName = TBRoom.Text,
-                DateOfFirstUsage = (DateTime)DatePicker.SelectedDate
+                DateOfFirstUsage = DatePicker.SelectedDate
             };
             IResult iresult = _processHardware.CaptureHardware(temp);
             if (iresult.HasError)
