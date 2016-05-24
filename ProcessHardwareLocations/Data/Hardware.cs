@@ -2,7 +2,7 @@
 
 namespace ProcessHardwareLocations.Data
 {
-    public class Hardware : IHardware
+    public class Hardware
     {
         public Guid Id { get; set; }
         public string BuildingName { get; set; }

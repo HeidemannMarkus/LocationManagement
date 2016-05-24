@@ -9,13 +9,13 @@ namespace ProcessHardwareLocations
 {
     public class ProcessHardwareLocations : IProcessHardwareLocations
     {
-       private Dictionary<Guid, IHardware> HardWareList { get; set; }
+       private Dictionary<Guid, Hardware> HardWareList { get; set; }
 
         public ProcessHardwareLocations()
         {
-            HardWareList = new Dictionary<Guid, IHardware>();
+            HardWareList = new Dictionary<Guid, Hardware>();
         }
-       public IResult CaptureHardware(IHardware newHardware)
+       public IResult CaptureHardware(Hardware newHardware)
        {
          var returnModel = new Result();
           if (newHardware.Id == Guid.Empty)
@@ -32,12 +32,12 @@ namespace ProcessHardwareLocations
           return returnModel;
        }
 
-       public List<IHardware> GetHardware(string buildingName, string roomName)
+       public List<Hardware> GetHardware(string buildingName, string roomName)
        {
           throw new NotImplementedException();
        }
 
-       public List<IHardware> GetHardware()
+       public List<Hardware> GetHardware()
        {
           return HardWareList.Values.ToList();
        }
@@ -45,20 +45,20 @@ namespace ProcessHardwareLocations
        public IResult LoadHardware(string filepath)
        {
          var resultModel = new Result();
-         var loaded_Hardware = new Dictionary<Guid, IHardware>();
+         var loaded_Hardware = new Dictionary<Guid, Hardware>();
          switch (Path.GetExtension(filepath))
          {
                 case ".dat":
-                    loaded_Hardware = new BinaryParser().FromFile<Dictionary<Guid, IHardware>>(filepath);
+                    loaded_Hardware = new BinaryParser().FromFile<Dictionary<Guid, Hardware>>(filepath);
                     break;
                 case ".xml":
-                    loaded_Hardware = new XmlParser().FromFile<Dictionary<Guid, IHardware>>(filepath);
+                    loaded_Hardware = new XmlParser().FromFile<Dictionary<Guid, Hardware>>(filepath);
                break;
             case ".json":
-                    loaded_Hardware = new JsonParser().FromFile<Dictionary<Guid, IHardware>>(filepath);
+                    loaded_Hardware = new JsonParser().FromFile<Dictionary<Guid, Hardware>>(filepath);
                break;
             case ".csv":
-                    loaded_Hardware = new CsvParser().FromFile<Dictionary<Guid, IHardware>>(filepath).Single();
+                    loaded_Hardware = new CsvParser().FromFile<Dictionary<Guid, Hardware>>(filepath).Single();
                break;
             default:
                resultModel.HasError = true;
@@ -84,7 +84,7 @@ namespace ProcessHardwareLocations
             return resultModel;
        }
 
-       public IResult UpdateHardware(IHardware updatedHardware)
+       public IResult UpdateHardware(Hardware updatedHardware)
        {
           var resultModel = new Result();
          

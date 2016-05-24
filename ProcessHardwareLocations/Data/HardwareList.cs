@@ -2,7 +2,7 @@
 
 namespace ProcessHardwareLocations.Data
 {
-    public class HardwareList : List<IHardware>
+    public class HardwareList : List<Hardware>
     {
     }
 }

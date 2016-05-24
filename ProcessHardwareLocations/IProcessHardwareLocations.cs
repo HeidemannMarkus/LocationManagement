@@ -6,11 +6,11 @@ namespace ProcessHardwareLocations
 {
    public interface IProcessHardwareLocations
    {
-      IResult CaptureHardware(IHardware newHardware);
-      List<IHardware> GetHardware(string buildingName, string roomName);
-      List<IHardware> GetHardware();
+      IResult CaptureHardware(Hardware newHardware);
+      List<Hardware> GetHardware(string buildingName, string roomName);
+      List<Hardware> GetHardware();
       IResult LoadHardware(string filepath);
-      IResult UpdateHardware(IHardware updatedHardware);
+      IResult UpdateHardware(Hardware updatedHardware);
       IResult SaveHardware(string filepath);
       IResult DeleteHardware(Guid hardware_ID);
 
