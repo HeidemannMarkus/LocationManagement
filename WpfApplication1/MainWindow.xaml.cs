@@ -1,9 +1,9 @@
 ﻿using Microsoft.Win32;
 using ProcessHardwareLocations;
 using ProcessHardwareLocations.Data;
-using System.Windows;
 using System;
-using System.Globalization;
+using System.Collections.Generic;
+using System.Windows;
 
 namespace WpfApplication1
 {
@@ -12,7 +12,7 @@ namespace WpfApplication1
     /// </summary>
     public partial class MainWindow : Window
     {
-        private HardwareList _hardwareList = new HardwareList();
+        private List<Hardware> _hardwareList = new List<Hardware>();
         private IProcessHardwareLocations _processHardware;
         private Hardware _selected;
 
@@ -38,7 +38,7 @@ namespace WpfApplication1
                     HardwareName = TBName.Text,
                     BuildingName = TBBuilding.Text,
                     RoomName = TBRoom.Text,
-                    DateOfFirstUsage = DatePicker.SelectedDate.Value.ToString().Split(' ')[0]
+                    DateOfFirstUsage = DatePicker.SelectedDate
                 };
                 hasError(_processHardware.UpdateHardware(temp));
             }
@@ -59,7 +59,7 @@ namespace WpfApplication1
                     HardwareName = TBName.Text,
                     BuildingName = TBBuilding.Text,
                     RoomName = TBRoom.Text,
-                    DateOfFirstUsage = DatePicker.SelectedDate.Value.ToString().Split(' ')[0]
+                    DateOfFirstUsage = DatePicker.SelectedDate
                 };
 
                 if (!hasError(_processHardware.CaptureHardware(temp)))
@@ -97,7 +97,7 @@ namespace WpfApplication1
             }
             TBName.Focus();
         }
-        
+
         private void listViewHardware_SelectionChanged_1(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             _selected = (Hardware) listViewHardware.SelectedItem;
@@ -105,7 +105,7 @@ namespace WpfApplication1
             TBArt.Text = _selected.HardwareType;
             TBBuilding.Text = _selected.BuildingName;
             TBRoom.Text = _selected.RoomName;
-            DatePicker.SelectedDate = DateTime.ParseExact(_selected.DateOfFirstUsage, "dd.MM.yyyy", CultureInfo.InvariantCulture);
+            DatePicker.SelectedDate = _selected.DateOfFirstUsage;
         }
 
         private void CBbuilding_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
@@ -120,7 +120,7 @@ namespace WpfApplication1
 
         private void updateListView()
         {
-            _hardwareList = (HardwareList)_processHardware.GetHardware();
+            _hardwareList = _processHardware.GetHardware();
             CBroom.Items.Clear();
             CBbuilding.Items.Clear();
             initCB();
