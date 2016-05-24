@@ -1,14 +1,27 @@
 ﻿using System;
+using System.Runtime.Serialization;
 
 namespace ProcessHardwareLocations.Data
 {
-    public class Hardware
-    {
-        public Guid Id { get; set; }
-        public string BuildingName { get; set; }
-        public string RoomName { get; set; }
-        public string HardwareType { get; set; }
-        public string HardwareName { get; set; }
-        public DateTime? DateOfFirstUsage { get; set; }
-    }
+   [DataContract]
+   public class Hardware
+   {
+      [DataMember]
+      public Guid Id { get; set; }
+
+      [DataMember]
+      public string BuildingName { get; set; }
+
+      [DataMember]
+      public string RoomName { get; set; }
+
+      [DataMember]
+      public string HardwareType { get; set; }
+
+      [DataMember]
+      public string HardwareName { get; set; }
+
+      [DataMember]
+      public DateTime? DateOfFirstUsage { get; set; }
+   }
 }
