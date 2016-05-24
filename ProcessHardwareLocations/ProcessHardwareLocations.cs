@@ -32,14 +32,20 @@ namespace ProcessHardwareLocations
           return returnModel;
        }
 
-       public List<IHardware> GetHardware(string buildingName, string roomName)
+       public HardwareList GetHardware(string buildingName, string roomName)
        {
           throw new NotImplementedException();
        }
 
-       public List<IHardware> GetHardware()
+       public HardwareList GetHardware()
        {
-          return HardWareList.Values.ToList();
+            IHardware[] list = HardWareList.Values.ToArray();
+            HardwareList hardwarelist = new HardwareList();
+            for (int i=0; i < list.Length; i++)
+            {
+                hardwarelist.Add(list[i]);
+            }
+            return hardwarelist;
        }
 
        public IResult LoadHardware(string filepath)

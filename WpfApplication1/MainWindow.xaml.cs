@@ -3,7 +3,7 @@ using ProcessHardwareLocations;
 using ProcessHardwareLocations.Data;
 using System.Windows;
 using System;
-
+using System.Globalization;
 
 namespace WpfApplication1
 {
@@ -18,78 +18,79 @@ namespace WpfApplication1
 
         public MainWindow()
         {
-            _processHardware = new ProcessHardwareLocations.ProcessHardwareLocations();
             InitializeComponent();
+            TBName.Focus();
+            DatePicker.SelectedDate = DateTime.Today;
+            listViewHardware.ItemsSource = this._hardwareList;
+            _processHardware = new ProcessHardwareLocations.ProcessHardwareLocations();
         }
 
         private void BtnEdit_Click(object sender, RoutedEventArgs e)
         {
-            var temp = new Hardware
+            if (inputHasValues())
             {
-                HardwareType = TBArt.Text,
-                HardwareName = TBName.Text,
-                BuildingName = TBBuilding.Text,
-                RoomName = TBRoom.Text,
-                DateOfFirstUsage = (DateTime)DatePicker.SelectedDate
-            };
-            checkError(_processHardware.UpdateHardware(temp));
+                var temp = new Hardware
+                {
+                    HardwareType = TBArt.Text,
+                    HardwareName = TBName.Text,
+                    BuildingName = TBBuilding.Text,
+                    RoomName = TBRoom.Text,
+                    DateOfFirstUsage = DatePicker.SelectedDate.Value.ToString().Split(' ')[0]
+                };
+                hasError(_processHardware.UpdateHardware(temp));
+            }
         }
 
         private void BtnDelete_Click(object sender, RoutedEventArgs e)
         {
-            checkError(_processHardware.DeleteHardware(_selected.Id));
+            hasError(_processHardware.DeleteHardware(_selected.Id));
         }
 
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
-            var temp = new Hardware
+            if (inputHasValues())
             {
-                HardwareType = TBArt.Text,
-                HardwareName = TBName.Text,
-                BuildingName = TBBuilding.Text,
-                RoomName = TBRoom.Text,
-                DateOfFirstUsage = (DateTime)DatePicker.SelectedDate
-            };
-            IResult iresult = _processHardware.CaptureHardware(temp);
-            if (iresult.HasError)
-            {
-                MessageBox.Show("Fehler", iresult.ErrorMessage, MessageBoxButton.OK);
-            }
-            else
-            {
-                updateListView();
-                TBName.Clear();
-                TBArt.Clear();
-                TBBuilding.Clear();
-                TBRoom.Clear();
-                DatePicker.SelectedDate = DateTime.Today;
+                var temp = new Hardware
+                {
+                    HardwareType = TBArt.Text,
+                    HardwareName = TBName.Text,
+                    BuildingName = TBBuilding.Text,
+                    RoomName = TBRoom.Text,
+                    DateOfFirstUsage = DatePicker.SelectedDate.Value.ToString().Split(' ')[0]
+                };
 
-                TBName.Focus();
+                if (!hasError(_processHardware.CaptureHardware(temp)))
+                {
+                    TBName.Clear();
+                    TBArt.Clear();
+                    TBBuilding.Clear();
+                    TBRoom.Clear();
+                    DatePicker.SelectedDate = DateTime.Today;
+
+                    TBName.Focus();
+                }
             }
         }
 
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
-            IResult iresult = null;
             SaveFileDialog sfd = new SaveFileDialog();
-            sfd.DefaultExt = ".xml";
-            sfd.Filter = "Loading files| *.dat; *.xml; *.json";
+           // sfd.DefaultExt = ".xml";
+            sfd.Filter = "Loading files (*.dat;*.xml;*.json)| *.dat; *.xml; *.json";
             if (sfd.ShowDialog() == true)
             {
-                checkError(_processHardware.SaveHardware(sfd.FileName));
+                hasError(_processHardware.SaveHardware(sfd.FileName));
             }
             TBName.Focus();
         }
 
         private void BtnLoad_Click(object sender, RoutedEventArgs e)
         {
-            IResult iresult = null;
             OpenFileDialog ofd = new OpenFileDialog();
-            // TODO Dateifilter
-            ofd.Filter = "Loading files| *.dat; *.xml; *.csv; *.json";
+            ofd.Filter = "Loading files (*.dat;*.xml;*.csv;*.json)| *.dat; *.xml; *.csv; *.json";
             if (ofd.ShowDialog() == true)
             {
-                checkError(_processHardware.LoadHardware(ofd.FileName));
+                hasError(_processHardware.LoadHardware(ofd.FileName));
             }
             TBName.Focus();
         }
@@ -101,7 +102,7 @@ namespace WpfApplication1
             TBArt.Text = _selected.HardwareType;
             TBBuilding.Text = _selected.BuildingName;
             TBRoom.Text = _selected.RoomName;
-            DatePicker.SelectedDate = _selected.DateOfFirstUsage;
+            DatePicker.SelectedDate = DateTime.ParseExact(_selected.DateOfFirstUsage, "dd.MM.yyyy", CultureInfo.InvariantCulture);
         }
 
         private void CBbuilding_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
@@ -116,7 +117,24 @@ namespace WpfApplication1
 
         private void updateListView()
         {
-            listViewHardware.ItemsSource = _processHardware.GetHardware();
+            _hardwareList = (HardwareList)_processHardware.GetHardware();
+            CBroom.Items.Clear();
+            CBbuilding.Items.Clear();
+            foreach (Hardware hardware in _hardwareList)
+            {
+                String room = hardware.RoomName;
+                String building = hardware.BuildingName;
+                if (!CBroom.Items.Contains(room))
+                {
+                    CBroom.Items.Add(room);
+                }
+
+                if (!CBbuilding.Items.Contains(building))
+                {
+                    CBbuilding.Items.Add(building);
+                }
+            }
+            listViewHardware.ItemsSource = this._hardwareList;
             listViewHardware.Items.Refresh();
         }
 
@@ -126,17 +144,32 @@ namespace WpfApplication1
             listViewHardware.Items.Refresh();
         }
 
-        private void checkError(IResult iresult)
+        private bool hasError(IResult iresult)
         {
             if (iresult.HasError)
             {
-                MessageBox.Show("Fehler", iresult.ErrorMessage, MessageBoxButton.OK);
+                MessageBox.Show(iresult.ErrorMessage, "Fehler", MessageBoxButton.OK);
+                return true;
             }
             else
             {
                 updateListView();
+                return false;
             }
            
+        }
+
+        private bool inputHasValues()
+        {
+            if (TBName.Text == "" || TBArt.Text == "" || TBBuilding.Text == "" || TBRoom.Text == "")
+            {
+                MessageBox.Show("Fehlende Angaben, füllen Sie alle Felder aus.", "Fehler", MessageBoxButton.OK);
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
     }
 }

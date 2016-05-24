@@ -7,8 +7,8 @@ namespace ProcessHardwareLocations
    public interface IProcessHardwareLocations
    {
       IResult CaptureHardware(IHardware newHardware);
-      List<IHardware> GetHardware(string buildingName, string roomName);
-      List<IHardware> GetHardware();
+      HardwareList GetHardware(string buildingName, string roomName);
+      HardwareList GetHardware();
       IResult LoadHardware(string filepath);
       IResult UpdateHardware(IHardware updatedHardware);
       IResult SaveHardware(string filepath);

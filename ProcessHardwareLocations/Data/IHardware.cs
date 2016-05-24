@@ -9,6 +9,6 @@ namespace ProcessHardwareLocations.Data
         string RoomName { get; set; }
         string HardwareType { get; set; }
         string HardwareName { get; set; }
-        DateTime DateOfFirstUsage { get; set; }
+        string DateOfFirstUsage { get; set; }
    }
 }
