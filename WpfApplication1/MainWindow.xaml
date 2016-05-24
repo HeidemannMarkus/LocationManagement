@@ -10,7 +10,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <GroupBox Header="Hardware" Height="332" HorizontalAlignment="Left" Margin="10,12,0,0" Name="groupBox1" VerticalAlignment="Top" Width="353">
+        <GroupBox Header="Hardware" Height="290" HorizontalAlignment="Left" Margin="10,12,0,0" Name="groupBox1" VerticalAlignment="Top" Width="353">
             <Grid Margin="0,43,12,3">
                 <Label Content="Name" Height="29" HorizontalAlignment="Left" Margin="10,10,0,0" Name="label1" VerticalAlignment="Top" Width="77" />
                 <Label Content="Gebäude" Height="29" HorizontalAlignment="Left" Margin="10,68,0,0" Name="label2" VerticalAlignment="Top" Width="77" />
@@ -21,8 +21,6 @@
                 <TextBox Height="23" HorizontalAlignment="Left" Margin="147,68,0,0" Name="TBBuilding" VerticalAlignment="Top" Width="182" />
                 <TextBox Height="23" HorizontalAlignment="Left" Margin="147,95,0,0" Name="TBRoom" VerticalAlignment="Top" Width="182" />
                 <Button Content="Hinzufügen" Height="23" HorizontalAlignment="Left" Margin="56,196,0,0" Name="BtnAdd" VerticalAlignment="Top" Width="75" Click="BtnAdd_Click" />
-                <Button Content="Speichern" Height="23" HorizontalAlignment="Left" Margin="56,303,0,-62" Name="BtnSave" VerticalAlignment="Top" Width="75" Click="BtnSave_Click" />
-                <Button Content="Laden" Height="23" HorizontalAlignment="Right" Margin="0,303,38,-62" Name="BtnLoad" VerticalAlignment="Top" Width="75" Click="BtnLoad_Click" />
                 <Button Content="Ändern" Height="23" HorizontalAlignment="Left" Margin="136,196,0,0" Name="BtnEdit" VerticalAlignment="Top" Width="75" Click="BtnEdit_Click" />
                 <Button Content="Löschen" Height="23" HorizontalAlignment="Left" Margin="216,196,0,0" Name="BtnDelete" VerticalAlignment="Top" Width="75" Click="BtnDelete_Click" />
                 <DatePicker Height="25" HorizontalAlignment="Left" Margin="147,122,0,0" Name="DatePicker" VerticalAlignment="Top" Width="182" />
@@ -42,13 +40,18 @@
             </ListView.View>
         </ListView>
         <GroupBox Header="Filtern" Height="101" HorizontalAlignment="Left" Margin="383,319,0,0" Name="groupBox2" VerticalAlignment="Top" Width="372" RenderTransformOrigin="0.795,0.545">
-            <Grid Margin="0,0,4,0">
-                <Label Content="Raum" Height="29" HorizontalAlignment="Left" Margin="44,44,0,0" Name="label5" VerticalAlignment="Top" Width="61" />
-                <Label Content="Gebäude" HorizontalAlignment="Left" Margin="44,15,0,40" Name="label7" Width="61" />
-                <ComboBox Height="23" HorizontalAlignment="Left" Margin="130,16,0,0" Name="CBbuilding" VerticalAlignment="Top" Width="142" SelectionChanged="CBbuilding_SelectionChanged" />
-                <ComboBox Height="23" HorizontalAlignment="Left" Margin="130,46,0,0" Name="CBroom" VerticalAlignment="Top" Width="142" SelectionChanged="CBroom_SelectionChanged" />
+            <Grid Margin="10,0,-2,0">
+                <Label Content="Raum" Height="29" HorizontalAlignment="Left" Margin="10,44,0,0" Name="label5" VerticalAlignment="Top" Width="61" />
+                <Label Content="Gebäude" HorizontalAlignment="Left" Margin="10,15,0,40" Name="label7" Width="61" />
+                <ComboBox Height="23" HorizontalAlignment="Left" Margin="76,15,0,0" Name="CBbuilding" VerticalAlignment="Top" Width="142" SelectionChanged="CBbuilding_SelectionChanged" />
+                <ComboBox Height="23" HorizontalAlignment="Left" Margin="76,46,0,0" Name="CBroom" VerticalAlignment="Top" Width="142" SelectionChanged="CBroom_SelectionChanged" />
             </Grid>
         </GroupBox>
-        <GroupBox x:Name="groupBox" Header="Dateien" HorizontalAlignment="Left" Margin="10,349,0,0" VerticalAlignment="Top" Width="353" Height="71"/>
+        <GroupBox Header="Dateien"  HorizontalAlignment="Left" Margin="10,319,0,0" Name="groupBox3" VerticalAlignment="Top" Width="353" Height="101">
+            <Grid Margin="0,0,4,0">
+                <Button Content="Laden" Height="23" HorizontalAlignment="Right" Margin="0,28,47,0" Name="BtnLoad" VerticalAlignment="Top" Width="75" Click="BtnLoad_Click" />
+                <Button Content="Speichern" Height="23" HorizontalAlignment="Right" Margin="0,28,207,0" Name="BtnSave" VerticalAlignment="Top" Width="75" Click="BtnSave_Click" />
+            </Grid>
+        </GroupBox>
     </Grid>
 </Window>
