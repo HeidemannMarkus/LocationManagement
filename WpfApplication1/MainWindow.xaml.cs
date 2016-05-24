@@ -78,7 +78,6 @@ namespace WpfApplication1
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
             SaveFileDialog sfd = new SaveFileDialog();
-           // sfd.DefaultExt = ".xml";
             sfd.Filter = "Loading files (*.dat;*.xml;*.json)| *.dat; *.xml; *.json";
             if (sfd.ShowDialog() == true)
             {
