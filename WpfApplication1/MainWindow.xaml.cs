@@ -155,7 +155,7 @@ namespace WpfApplication1
             if (room == "Alle")
                 room = null;
             
-            listViewHardware.ItemsSource = _processHardware.GetHardware(CBbuilding.SelectedValue.ToString(), CBroom.SelectedValue.ToString());
+            listViewHardware.ItemsSource = _processHardware.GetHardware(building, room);
             listViewHardware.Items.Refresh();
         }
 
