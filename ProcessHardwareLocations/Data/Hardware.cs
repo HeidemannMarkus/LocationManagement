@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 
 namespace ProcessHardwareLocations.Data
 {
-   [DataContract]
+   [Serializable, DataContract]
    public class Hardware
    {
       [DataMember]
