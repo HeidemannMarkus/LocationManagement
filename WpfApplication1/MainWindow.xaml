@@ -5,44 +5,52 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApplication1"
         mc:Ignorable="d"
-        Title="Hardwareerfassung" Height="472" Width="728">
-    <Grid Width="700" Height="430">
-        <GroupBox Header="Hardware" Height="408" HorizontalAlignment="Left" Margin="10,12,0,0" Name="groupBox1" VerticalAlignment="Top" Width="361">
-            <Grid Margin="0,22,0,74">
-                <Label Content="Name" Height="29" HorizontalAlignment="Left" Margin="20,25,0,0" Name="label1" VerticalAlignment="Top" Width="77" />
-                <Label Content="Gebäude" Height="29" HorizontalAlignment="Left" Margin="20,83,0,0" Name="label2" VerticalAlignment="Top" Width="77" />
-                <Label Content="Raum" Height="29" HorizontalAlignment="Left" Margin="20,110,0,0" Name="label3" VerticalAlignment="Top" Width="98" />
-                <Label Content="Tag Inbetriebnahme" Height="29" HorizontalAlignment="Left" Margin="20,137,0,0" Name="label4" VerticalAlignment="Top" Width="122" />
-                <TextBox Height="23" HorizontalAlignment="Left" Margin="157,25,0,0" Name="TBName" VerticalAlignment="Top" Width="182" />
-                <TextBox Height="23" HorizontalAlignment="Left" Margin="157,83,0,0" Name="TBBuilding" VerticalAlignment="Top" Width="182" />
-                <TextBox Height="23" HorizontalAlignment="Left" Margin="157,110,0,0" Name="TBRoom" VerticalAlignment="Top" Width="182" />
+        Title="Hardwareerfassung" Height="472" Width="792.667" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <Grid Height="430" Margin="10,6,10,5">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <GroupBox Header="Hardware" Height="290" HorizontalAlignment="Left" Margin="10,12,0,0" Name="groupBox1" VerticalAlignment="Top" Width="353">
+            <Grid Margin="0,43,12,3">
+                <Label Content="Name" Height="29" HorizontalAlignment="Left" Margin="10,10,0,0" Name="label1" VerticalAlignment="Top" Width="77" />
+                <Label Content="Gebäude" Height="29" HorizontalAlignment="Left" Margin="10,68,0,0" Name="label2" VerticalAlignment="Top" Width="77" />
+                <Label Content="Raum" Height="29" HorizontalAlignment="Left" Margin="10,95,0,0" Name="label3" VerticalAlignment="Top" Width="98" />
+                <Label Content="Tag Inbetriebnahme" Height="29" HorizontalAlignment="Left" Margin="10,122,0,0" Name="label4" VerticalAlignment="Top" Width="122" />
+                <TextBox Height="23" HorizontalAlignment="Left" Margin="147,10,0,0" Name="TBName" VerticalAlignment="Top" Width="182" />
+                <TextBox Height="23" HorizontalAlignment="Left" Margin="147,39,0,0" Name="TBArt" VerticalAlignment="Top" Width="182" />
+                <TextBox Height="23" HorizontalAlignment="Left" Margin="147,68,0,0" Name="TBBuilding" VerticalAlignment="Top" Width="182" />
+                <TextBox Height="23" HorizontalAlignment="Left" Margin="147,95,0,0" Name="TBRoom" VerticalAlignment="Top" Width="182" />
                 <Button Content="Hinzufügen" Height="23" HorizontalAlignment="Left" Margin="56,196,0,0" Name="BtnAdd" VerticalAlignment="Top" Width="75" Click="BtnAdd_Click" />
-                <Button Content="Speichern" Height="23" HorizontalAlignment="Left" Margin="56,248,0,0" Name="BtnSave" VerticalAlignment="Top" Width="75" Click="BtnSave_Click" />
-                <Button Content="Laden" Height="23" HorizontalAlignment="Right" Margin="0,248,58,0" Name="BtnLoad" VerticalAlignment="Top" Width="75" Click="BtnLoad_Click" />
                 <Button Content="Ändern" Height="23" HorizontalAlignment="Left" Margin="136,196,0,0" Name="BtnEdit" VerticalAlignment="Top" Width="75" Click="BtnEdit_Click" />
                 <Button Content="Löschen" Height="23" HorizontalAlignment="Left" Margin="216,196,0,0" Name="BtnDelete" VerticalAlignment="Top" Width="75" Click="BtnDelete_Click" />
-                <DatePicker Height="25" HorizontalAlignment="Left" Margin="157,137,0,0" Name="DatePicker" VerticalAlignment="Top" Width="182" />
-                <TextBox Height="23" HorizontalAlignment="Left" Margin="157,54,0,0" Name="TBArt" VerticalAlignment="Top" Width="182" />
-                <Label Content="Art" Height="29" HorizontalAlignment="Left" Margin="20,54,0,0" Name="label6" VerticalAlignment="Top" Width="77" />
+                <DatePicker Height="25" HorizontalAlignment="Left" Margin="147,122,0,0" Name="DatePicker" VerticalAlignment="Top" Width="182" />
+                <Label Content="Art" Height="29" HorizontalAlignment="Left" Margin="10,39,0,0" Name="label6" VerticalAlignment="Top" Width="77" />
             </Grid>
         </GroupBox>
-        <ListView Height="288" HorizontalAlignment="Left" Margin="395,24,0,0" Name="listViewHardware" VerticalAlignment="Top" Width="292" SelectionChanged="listViewHardware_SelectionChanged_1">
+        <ListView Height="288" HorizontalAlignment="Left" Margin="383,24,0,0" Name="listViewHardware" VerticalAlignment="Top" Width="372" SelectionChanged="listViewHardware_SelectionChanged_1">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Name" Width="60" DisplayMemberBinding="{Binding Path=name}"/>
-                    <GridViewColumn Header="Gebäude" Width="60" DisplayMemberBinding="{Binding Path=buildingName}"/>
-                    <GridViewColumn Header="Raum" Width="60" DisplayMemberBinding="{Binding Path=roomName}"/>
-                    <GridViewColumn Header="Tag Inbetriebname" Width="110" DisplayMemberBinding="{Binding Path=dayFirstUse}"/>
+                    <GridViewColumn Header="Name" Width="55" DisplayMemberBinding="{Binding Path=HardwareName}"/>
+                    <GridViewColumn Header="Art" Width="55" DisplayMemberBinding="{Binding Path=HardwareType}"/>
+                    <GridViewColumn Header="Gebäude" Width="60" DisplayMemberBinding="{Binding Path=BuildingName}"/>
+                    <GridViewColumn Header="Raum" Width="55" DisplayMemberBinding="{Binding Path=RoomName}"/>
+                    <GridViewColumn Header="Tag Inbetriebname" Width="110" DisplayMemberBinding="{Binding Path=DateOfFirstUsage}"/>
 
                 </GridView>
             </ListView.View>
         </ListView>
-        <GroupBox Header="Filtern" Height="101" HorizontalAlignment="Left" Margin="395,319,0,0" Name="groupBox2" VerticalAlignment="Top" Width="292" RenderTransformOrigin="0.795,0.545">
-            <Grid Margin="0,0,-2,0">
-                <ComboBox Height="23" HorizontalAlignment="Left" Margin="130,46,0,0" Name="CBroom" VerticalAlignment="Top" Width="142" SelectionChanged="CBroom_SelectionChanged" />
-                <Label Content="Raum" Height="29" HorizontalAlignment="Left" Margin="44,44,0,0" Name="label5" VerticalAlignment="Top" Width="61" />
-                <Label Content="Gebäude" HorizontalAlignment="Left" Margin="44,15,0,40" Name="label7" Width="61" />
-                <ComboBox Height="23" HorizontalAlignment="Left" Margin="130,16,0,0" Name="CBbuilding" VerticalAlignment="Top" Width="142" SelectionChanged="CBbuilding_SelectionChanged" />
+        <GroupBox Header="Filtern" Height="101" HorizontalAlignment="Left" Margin="383,319,0,0" Name="groupBox2" VerticalAlignment="Top" Width="372" RenderTransformOrigin="0.795,0.545">
+            <Grid Margin="10,0,-2,0">
+                <Label Content="Raum" Height="29" HorizontalAlignment="Left" Margin="10,44,0,0" Name="label5" VerticalAlignment="Top" Width="61" />
+                <Label Content="Gebäude" HorizontalAlignment="Left" Margin="10,15,0,40" Name="label7" Width="61" />
+                <ComboBox Height="23" HorizontalAlignment="Left" Margin="76,15,0,0" Name="CBbuilding" VerticalAlignment="Top" Width="142" SelectionChanged="CBbuilding_SelectionChanged" />
+                <ComboBox Height="23" HorizontalAlignment="Left" Margin="76,46,0,0" Name="CBroom" VerticalAlignment="Top" Width="142" SelectionChanged="CBroom_SelectionChanged" />
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="Dateien"  HorizontalAlignment="Left" Margin="10,319,0,0" Name="groupBox3" VerticalAlignment="Top" Width="353" Height="101">
+            <Grid Margin="0,0,4,0">
+                <Button Content="Laden" Height="23" HorizontalAlignment="Right" Margin="0,28,47,0" Name="BtnLoad" VerticalAlignment="Top" Width="75" Click="BtnLoad_Click" />
+                <Button Content="Speichern" Height="23" HorizontalAlignment="Right" Margin="0,28,207,0" Name="BtnSave" VerticalAlignment="Top" Width="75" Click="BtnSave_Click" />
             </Grid>
         </GroupBox>
     </Grid>
