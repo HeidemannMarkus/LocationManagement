@@ -97,7 +97,7 @@
   <ItemGroup>
     <ProjectReference Include="..\ProcessHardwareLocations\ProcessHardwareLocations.csproj">
       <Project>{9872d40e-a648-42fe-8fe8-af4de56419b1}</Project>
-      <Name>ProcessHardwareLocationsProject</Name>
+      <Name>ProcessHardwareLocations</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
