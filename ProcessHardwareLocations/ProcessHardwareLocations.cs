@@ -135,5 +135,21 @@ namespace ProcessHardwareLocations
 
           return resultModel;
        }
+
+       public List<string> GetBuildings()
+       {
+          return HardWareList.Values
+            .Select(model => model.BuildingName)
+            .Distinct()
+            .ToList();
+       }
+
+       public List<string> GetRooms()
+       {
+         return HardWareList.Values
+           .Select(model => model.RoomName)
+           .Distinct()
+           .ToList();
+      }
     }
 }
