@@ -34,8 +34,38 @@ namespace ProcessHardwareLocations
 
        public HardwareList GetHardware(string buildingName, string roomName)
        {
-          throw new NotImplementedException();
-       }
+            IHardware[] list = HardWareList.Values.ToArray();
+            HardwareList hardwarelist = new HardwareList();
+            for (int i = 0; i < list.Length; i++)
+            {
+                if (buildingName == "Alle" && roomName == "Alle")
+                {
+                    return GetHardware();
+                }
+                else if (buildingName != "Alle" && roomName != "Alle")
+                {
+                    if (buildingName == list[i].BuildingName && roomName == list[i].RoomName)
+                    {
+                        hardwarelist.Add(list[i]);
+                    }
+                }
+                else if (roomName != "Alle")
+                {
+                    if (roomName == list[i].RoomName)
+                    {
+                        hardwarelist.Add(list[i]);
+                    }
+                }
+                else
+                {
+                    if (buildingName == list[i].BuildingName)
+                    {
+                        hardwarelist.Add(list[i]);
+                    }
+                }
+            }
+            return hardwarelist;
+        }
 
        public HardwareList GetHardware()
        {

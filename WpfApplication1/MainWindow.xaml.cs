@@ -21,6 +21,9 @@ namespace WpfApplication1
             InitializeComponent();
             TBName.Focus();
             DatePicker.SelectedDate = DateTime.Today;
+
+            initCB();
+
             listViewHardware.ItemsSource = this._hardwareList;
             _processHardware = new ProcessHardwareLocations.ProcessHardwareLocations();
         }
@@ -120,6 +123,7 @@ namespace WpfApplication1
             _hardwareList = (HardwareList)_processHardware.GetHardware();
             CBroom.Items.Clear();
             CBbuilding.Items.Clear();
+            initCB();
             foreach (Hardware hardware in _hardwareList)
             {
                 String room = hardware.RoomName;
@@ -140,8 +144,12 @@ namespace WpfApplication1
 
         private void getHardwareWithFilter()
         {
-            listViewHardware.ItemsSource = _processHardware.GetHardware(CBbuilding.SelectedItem.ToString(), CBroom.SelectedItem.ToString());
-            listViewHardware.Items.Refresh();
+            if (CBbuilding.SelectedValue != null && CBroom.SelectedValue != null && 
+                CBbuilding.SelectedValue.ToString() != "Alle" && CBroom.SelectedValue.ToString() != "Alle")
+            { 
+                listViewHardware.ItemsSource = _processHardware.GetHardware(CBbuilding.SelectedValue.ToString(), CBroom.SelectedValue.ToString());
+                listViewHardware.Items.Refresh();
+            }
         }
 
         private bool hasError(IResult iresult)
@@ -170,6 +178,14 @@ namespace WpfApplication1
             {
                 return true;
             }
+        }
+
+        private void initCB()
+        {
+            CBroom.Items.Add("Alle");
+            CBroom.SelectedItem = "Alle";
+            CBbuilding.Items.Add("Alle");
+            CBbuilding.SelectedItem = "Alle";
         }
     }
 }
