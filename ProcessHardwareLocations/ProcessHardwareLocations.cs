@@ -34,8 +34,12 @@ namespace ProcessHardwareLocations
 
        public List<Hardware> GetHardware(string buildingName, string roomName)
        {
-          throw new NotImplementedException();
-       }
+         return HardWareList.Values.Where(query =>
+          (buildingName == null || query.BuildingName == buildingName)
+          && 
+          (roomName == null || query.RoomName == roomName)
+          ).ToList();
+      }
 
        public List<Hardware> GetHardware()
        {
