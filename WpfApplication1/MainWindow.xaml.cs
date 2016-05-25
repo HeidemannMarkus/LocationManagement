@@ -94,7 +94,7 @@ namespace WpfApplication1
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
             SaveFileDialog sfd = new SaveFileDialog();
-            sfd.Filter = "Loading files (*.dat;*.xml;*.json)| *.dat; *.xml; *.json";
+            sfd.Filter = "Loading files (*.json*;*.xml;*.dat)| *.json; *.xml; *.dat";
             if (sfd.ShowDialog() == true)
             {
                 hasError(_processHardware.SaveHardware(sfd.FileName));
