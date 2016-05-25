@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProcessHardwareLocations", "ProcessHardwareLocations\ProcessHardwareLocations.csproj", "{9872D40E-A648-42FE-8FE8-AF4DE56419B1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Heidemann.ProcessHardwareLocations", "ProcessHardwareLocations\Heidemann.ProcessHardwareLocations.csproj", "{9872D40E-A648-42FE-8FE8-AF4DE56419B1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GUI", "WpfApplication1\GUI.csproj", "{CA24A2A7-F448-4866-A618-69D365DC2302}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Heidemann.GUI", "WpfApplication1\Heidemann.GUI.csproj", "{CA24A2A7-F448-4866-A618-69D365DC2302}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProcessHardwareLocationsBusinuessLayerTests1", "ProcessHardwareLocationsBusinuessLayerTests1\ProcessHardwareLocationsBusinuessLayerTests1.csproj", "{03E2EC26-3B0F-4072-B8E0-684D1561C4B8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Heidemann.ProcessHardwareLocationsBusinuessLayerTests1", "ProcessHardwareLocationsBusinuessLayerTests1\Heidemann.ProcessHardwareLocationsBusinuessLayerTests1.csproj", "{03E2EC26-3B0F-4072-B8E0-684D1561C4B8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

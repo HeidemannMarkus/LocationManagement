@@ -64,9 +64,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ProcessHardwareLocations\ProcessHardwareLocations.csproj">
+    <ProjectReference Include="..\ProcessHardwareLocations\Heidemann.ProcessHardwareLocations.csproj">
       <Project>{9872D40E-A648-42FE-8FE8-AF4DE56419B1}</Project>
-      <Name>ProcessHardwareLocations</Name>
+      <Name>Heidemann.ProcessHardwareLocations</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
