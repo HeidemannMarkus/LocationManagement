@@ -97,7 +97,10 @@ namespace WpfApplication1
             sfd.Filter = "Loading files (*.json*;*.xml;*.dat)| *.json; *.xml; *.dat";
             if (sfd.ShowDialog() == true)
             {
-                hasError(_processHardware.SaveHardware(sfd.FileName));
+                if (!hasError(_processHardware.SaveHardware(sfd.FileName)))
+                {
+                    MessageBox.Show("Die Daten wurden erfolgreich exportiert.", "Export", MessageBoxButton.OK);
+                }
             }
             TBName.Focus();
         }
@@ -108,7 +111,10 @@ namespace WpfApplication1
             ofd.Filter = "Loading files (*.dat;*.xml;*.csv;*.json)| *.dat; *.xml; *.csv; *.json";
             if (ofd.ShowDialog() == true)
             {
-                hasError(_processHardware.LoadHardware(ofd.FileName));
+                if (!hasError(_processHardware.LoadHardware(ofd.FileName)))
+                {
+                    MessageBox.Show("Die Daten wurden erfolgreich importiert.", "Import", MessageBoxButton.OK);
+                }
             }
             TBName.Focus();
         }
