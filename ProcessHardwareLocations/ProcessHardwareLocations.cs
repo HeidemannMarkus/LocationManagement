@@ -144,6 +144,7 @@ namespace ProcessHardwareLocations
        public List<string> GetBuildings()
        {
           return HardWareList.Values
+            .OrderBy(model => model.BuildingName)
             .Select(model => model.BuildingName)
             .Distinct()
             .ToList();
@@ -152,6 +153,7 @@ namespace ProcessHardwareLocations
        public List<string> GetRooms()
        {
          return HardWareList.Values
+            .OrderBy(model => model.RoomName)
            .Select(model => model.RoomName)
            .Distinct()
            .ToList();
