@@ -49,20 +49,20 @@ namespace ProcessHardwareLocations
        public IResult LoadHardware(string filepath)
        {
          var resultModel = new Result();
-         var loaded_Hardware = new Dictionary<Guid, Hardware>();
+         var loaded_Hardware = new List<Hardware>();
          switch (Path.GetExtension(filepath))
          {
                 case ".dat":
-                    loaded_Hardware = new BinaryParser().FromFile<Dictionary<Guid, Hardware>>(filepath);
+               loaded_Hardware = new BinaryParser().FromFile<List<Hardware>>(filepath);
                     break;
                 case ".xml":
-                    loaded_Hardware = new XmlParser().FromFile<Dictionary<Guid, Hardware>>(filepath);
+               loaded_Hardware = new XmlParser().FromFile<List<Hardware>>(filepath);
                break;
             case ".json":
-                    loaded_Hardware = new JsonParser().FromFile<Dictionary<Guid, Hardware>>(filepath);
+               loaded_Hardware = new JsonParser().FromFile<List<Hardware>>(filepath);
                break;
             case ".csv":
-                    loaded_Hardware = new CsvParser().FromFile<Dictionary<Guid, Hardware>>(filepath).Single();
+               loaded_Hardware = new CsvParser().FromFile<List<Hardware>>(filepath).Single();
                break;
             default:
                resultModel.HasError = true;
@@ -71,17 +71,17 @@ namespace ProcessHardwareLocations
             }
             foreach (var hardware in loaded_Hardware)
             {
-                if (!HardWareList.ContainsKey(hardware.Key))
+                if (!HardWareList.ContainsKey(hardware.Id))
                 {
-                    HardWareList.Add(hardware.Key, hardware.Value);
+                    HardWareList.Add(hardware.Id, hardware);
                 }
                 else
                 {
-                    if (HardWareList[hardware.Key] != hardware.Value)
+                    if (HardWareList[hardware.Id] != hardware)
                     {
                         resultModel.HasError = true;
                         //TODO: ErrorMessage durch Liste ersetzen, damit n Fehlermeldungen zurückgegeben werden können
-                        resultModel.ErrorMessage += $",{hardware.Key} ist schon vorhanden";
+                        resultModel.ErrorMessage += $",{hardware.Id} ist schon vorhanden";
                     }
                 }
             }
