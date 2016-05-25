@@ -15,6 +15,5 @@ namespace ProcessHardwareLocations
       IResult DeleteHardware(Guid hardware_ID);
       List<string> GetBuildings();
       List<string> GetRooms();
-
    }
 }
