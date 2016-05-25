@@ -107,6 +107,16 @@ namespace ProcessHardwareLocations
       public IResult SaveHardware(string filepath)
       {
          var resultModel = new Result();
+
+         if (HardWareList.Count == 0)
+         {
+            return new Result
+            {
+               HasError = true,
+               ErrorMessage = "Leere Liste kann nicht gespeichert werden!"
+            };
+         }
+         
          List<Hardware> listToWrite = HardWareList.Values.ToList();
          switch (Path.GetExtension(filepath))
          {

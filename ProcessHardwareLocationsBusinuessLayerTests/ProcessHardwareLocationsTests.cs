@@ -26,5 +26,18 @@ namespace ProcessHardwareLocations.Tests
                   Id = Guid.NewGuid()
                }));
       }
+
+      [Fact]
+      public void SaveHardware_WhenListIsEmpty_ShouldThrowError()
+      {
+         Assert.Equal(
+            new Result
+            {
+               HasError = true,
+               ErrorMessage = "Leere Liste kann nicht gespeichert werden!"
+            },
+            new ProcessHardwareLocations()
+            .SaveHardware(@"C:\test.json"));
+      }
    }
 }
