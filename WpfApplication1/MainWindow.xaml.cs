@@ -32,21 +32,37 @@ namespace WpfApplication1
         {
             if (inputHasValues())
             {
-                var temp = new Hardware
+                if (_selected != null) {
+                    var temp = new Hardware
+                    {
+                        HardwareType = TBArt.Text,
+                        HardwareName = TBName.Text,
+                        BuildingName = TBBuilding.Text,
+                        RoomName = TBRoom.Text,
+                        DateOfFirstUsage = DatePicker.SelectedDate,
+                        Id = _selected.Id
+                    };
+                    hasError(_processHardware.UpdateHardware(temp));
+                }
+                else
                 {
-                    HardwareType = TBArt.Text,
-                    HardwareName = TBName.Text,
-                    BuildingName = TBBuilding.Text,
-                    RoomName = TBRoom.Text,
-                    DateOfFirstUsage = DatePicker.SelectedDate
-                };
-                hasError(_processHardware.UpdateHardware(temp));
+                    MessageBox.Show("Keine Hardware zum Updaten ausgewählt.", "Fehler", MessageBoxButton.OK);
+                }
             }
+            TBName.Focus();
         }
 
         private void BtnDelete_Click(object sender, RoutedEventArgs e)
         {
-            hasError(_processHardware.DeleteHardware(_selected.Id));
+            if (_selected != null)
+            {
+                hasError(_processHardware.DeleteHardware(_selected.Id));
+            }
+            else
+            {
+                MessageBox.Show("Keine Hardware zum Löschen ausgewählt.", "Fehler", MessageBoxButton.OK);
+            }
+            TBName.Focus();
         }
 
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
@@ -69,10 +85,10 @@ namespace WpfApplication1
                     TBBuilding.Clear();
                     TBRoom.Clear();
                     DatePicker.SelectedDate = DateTime.Today;
-
-                    TBName.Focus();
                 }
             }
+            updateListView();
+            TBName.Focus();
         }
 
         private void BtnSave_Click(object sender, RoutedEventArgs e)
@@ -100,55 +116,52 @@ namespace WpfApplication1
         private void listViewHardware_SelectionChanged_1(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             _selected = (Hardware) listViewHardware.SelectedItem;
-            TBName.Text = _selected.HardwareName;
-            TBArt.Text = _selected.HardwareType;
-            TBBuilding.Text = _selected.BuildingName;
-            TBRoom.Text = _selected.RoomName;
-            DatePicker.SelectedDate = _selected.DateOfFirstUsage;
+            if (_selected != null)
+            {
+                TBName.Text = _selected.HardwareName;
+                TBArt.Text = _selected.HardwareType;
+                TBBuilding.Text = _selected.BuildingName;
+                TBRoom.Text = _selected.RoomName;
+                DatePicker.SelectedDate = _selected.DateOfFirstUsage;
+            }
         }
-
-        private void CBbuilding_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
-        {
-            getHardwareWithFilter();
-        }
-
-        private void CBroom_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
-        {
-            getHardwareWithFilter();
-        }
-
+        
         private void updateListView()
         {
-            _hardwareList = _processHardware.GetHardware();
-            CBroom.Items.Clear();
-            CBbuilding.Items.Clear();
             initCB();
-            foreach (Hardware hardware in _hardwareList)
+            
+            foreach (string room in _processHardware.GetRooms())
             {
-                String room = hardware.RoomName;
-                String building = hardware.BuildingName;
-                if (!CBroom.Items.Contains(room))
-                {
-                    CBroom.Items.Add(room);
-                }
-
-                if (!CBbuilding.Items.Contains(building))
-                {
-                    CBbuilding.Items.Add(building);
-                }
+                CBroom.Items.Add(room);
             }
-            listViewHardware.ItemsSource = this._hardwareList;
+
+            foreach (string building in _processHardware.GetBuildings())
+            {
+                CBbuilding.Items.Add(building);
+            }
+            
+            listViewHardware.ItemsSource = _processHardware.GetHardware();
             listViewHardware.Items.Refresh();
         }
 
-        private void getHardwareWithFilter()
+        private void BtnFilter_Click(object sender, RoutedEventArgs e)
         {
-            if (CBbuilding.SelectedValue != null && CBroom.SelectedValue != null && 
-                CBbuilding.SelectedValue.ToString() != "Alle" && CBroom.SelectedValue.ToString() != "Alle")
-            { 
-                listViewHardware.ItemsSource = _processHardware.GetHardware(CBbuilding.SelectedValue.ToString(), CBroom.SelectedValue.ToString());
-                listViewHardware.Items.Refresh();
-            }
+            string room = CBroom.SelectedValue.ToString();
+            string building = CBbuilding.SelectedValue.ToString();
+
+            if (building == "Alle")
+                building = null;
+
+            if (room == "Alle")
+                room = null;
+            
+            listViewHardware.ItemsSource = _processHardware.GetHardware(building, room);
+            listViewHardware.Items.Refresh();
+        }
+
+        private void BtnResetFilter_Click(object sender, RoutedEventArgs e)
+        {
+            updateListView();
         }
 
         private bool hasError(IResult iresult)
@@ -181,6 +194,8 @@ namespace WpfApplication1
 
         private void initCB()
         {
+            CBbuilding.Items.Clear();
+            CBroom.Items.Clear();
             CBroom.Items.Add("Alle");
             CBroom.SelectedItem = "Alle";
             CBbuilding.Items.Add("Alle");

@@ -5,12 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApplication1"
         mc:Ignorable="d"
-        Title="Hardwareerfassung" Height="472" Width="792.667" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+        Title="Hardwareerfassung" Height="468" Width="792.667" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid Height="430" Margin="10,6,10,5">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <GroupBox Header="Hardware" Height="290" HorizontalAlignment="Left" Margin="10,12,0,0" Name="groupBox1" VerticalAlignment="Top" Width="353">
+        <GroupBox Header="Hardware" Height="300" HorizontalAlignment="Left" Margin="10,12,0,0" Name="groupBox1" VerticalAlignment="Top" Width="353">
             <Grid Margin="0,43,12,3">
                 <Label Content="Name" Height="29" HorizontalAlignment="Left" Margin="10,10,0,0" Name="label1" VerticalAlignment="Top" Width="77" />
                 <Label Content="Gebäude" Height="29" HorizontalAlignment="Left" Margin="10,68,0,0" Name="label2" VerticalAlignment="Top" Width="77" />
@@ -35,6 +35,7 @@
                     <GridViewColumn Header="Gebäude" Width="60" DisplayMemberBinding="{Binding Path=BuildingName}"/>
                     <GridViewColumn Header="Raum" Width="55" DisplayMemberBinding="{Binding Path=RoomName}"/>
                     <GridViewColumn Header="Tag Inbetriebname" Width="110" DisplayMemberBinding="{Binding Path=DateOfFirstUsage}"/>
+                    <GridViewColumn Header="Guid" Width="0" DisplayMemberBinding="{Binding Path=Id}"/>
 
                 </GridView>
             </ListView.View>
@@ -43,8 +44,10 @@
             <Grid Margin="10,0,-2,0">
                 <Label Content="Raum" Height="29" HorizontalAlignment="Left" Margin="10,44,0,0" Name="label5" VerticalAlignment="Top" Width="61" />
                 <Label Content="Gebäude" HorizontalAlignment="Left" Margin="10,15,0,40" Name="label7" Width="61" />
-                <ComboBox Height="23" HorizontalAlignment="Left" Margin="76,15,0,0" Name="CBbuilding" VerticalAlignment="Top" Width="142" SelectionChanged="CBbuilding_SelectionChanged" />
-                <ComboBox Height="23" HorizontalAlignment="Left" Margin="76,46,0,0" Name="CBroom" VerticalAlignment="Top" Width="142" SelectionChanged="CBroom_SelectionChanged" />
+                <ComboBox Height="23" HorizontalAlignment="Left" Margin="76,15,0,0" Name="CBbuilding" VerticalAlignment="Top" Width="142" />
+                <ComboBox Height="23" HorizontalAlignment="Left" Margin="76,46,0,0" Name="CBroom" VerticalAlignment="Top" Width="142" />
+                <Button Content="Filtern" Height="23" HorizontalAlignment="Right" Margin="0,16,22,0" Name="BtnFilter" VerticalAlignment="Top" Width="75" Click="BtnFilter_Click" />
+                <Button Content="Reset" Height="23" HorizontalAlignment="Right" Margin="0,46,22,0" Name="BtnResetFilter" VerticalAlignment="Top" Width="75" Click="BtnResetFilter_Click" />
             </Grid>
         </GroupBox>
         <GroupBox Header="Dateien"  HorizontalAlignment="Left" Margin="10,319,0,0" Name="groupBox3" VerticalAlignment="Top" Width="353" Height="101">
