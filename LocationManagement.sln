@@ -5,8 +5,6 @@ VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProcessHardwareLocations", "ProcessHardwareLocations\ProcessHardwareLocations.csproj", "{9872D40E-A648-42FE-8FE8-AF4DE56419B1}"
 EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "UnitTestProject1", "UnitTestProject1\UnitTestProject1.vbproj", "{F55B9DB4-B9F7-456C-BDDE-CE1D39675CF9}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApplication1", "WpfApplication1\WpfApplication1.csproj", "{CA24A2A7-F448-4866-A618-69D365DC2302}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProcessHardwareLocationsBusinuessLayerTests", "ProcessHardwareLocationsBusinuessLayerTests\ProcessHardwareLocationsBusinuessLayerTests.csproj", "{3A26D1A5-6E2C-4554-BCB8-6E62808BA139}"
@@ -21,10 +19,6 @@ Global
 		{9872D40E-A648-42FE-8FE8-AF4DE56419B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9872D40E-A648-42FE-8FE8-AF4DE56419B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9872D40E-A648-42FE-8FE8-AF4DE56419B1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F55B9DB4-B9F7-456C-BDDE-CE1D39675CF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F55B9DB4-B9F7-456C-BDDE-CE1D39675CF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F55B9DB4-B9F7-456C-BDDE-CE1D39675CF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F55B9DB4-B9F7-456C-BDDE-CE1D39675CF9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CA24A2A7-F448-4866-A618-69D365DC2302}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CA24A2A7-F448-4866-A618-69D365DC2302}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CA24A2A7-F448-4866-A618-69D365DC2302}.Release|Any CPU.ActiveCfg = Release|Any CPU
