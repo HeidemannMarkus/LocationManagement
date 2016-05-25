@@ -50,27 +50,27 @@ namespace ProcessHardwareLocations
       public IResult LoadHardware(string filepath)
       {
          var resultModel = new Result();
-         var loaded_Hardware = new List<Hardware>();
+         var loadedHardware = new List<Hardware>();
          switch (Path.GetExtension(filepath))
          {
             case ".dat":
-               loaded_Hardware = new BinaryParser().FromFile<List<Hardware>>(filepath);
+               loadedHardware = new BinaryParser().FromFile<List<Hardware>>(filepath);
                break;
             case ".xml":
-               loaded_Hardware = new XmlParser().FromFile<List<Hardware>>(filepath);
+               loadedHardware = new XmlParser().FromFile<List<Hardware>>(filepath);
                break;
             case ".json":
-               loaded_Hardware = new JsonParser().FromFile<List<Hardware>>(filepath);
+               loadedHardware = new JsonParser().FromFile<List<Hardware>>(filepath);
                break;
             case ".csv":
-               loaded_Hardware = new CsvParser().FromFile<List<Hardware>>(filepath).Single();
+               loadedHardware = new CsvParser().FromFile<List<Hardware>>(filepath).Single();
                break;
             default:
                resultModel.HasError = true;
                resultModel.ErrorMessage = "Format Unbekannt!!!!";
                break;
          }
-         foreach (var hardware in loaded_Hardware)
+         foreach (var hardware in loadedHardware)
          {
             if (!HardWareList.ContainsKey(hardware.Id))
             {
@@ -140,10 +140,10 @@ namespace ProcessHardwareLocations
          return resultModel;
       }
 
-      public IResult DeleteHardware(Guid hardware_ID)
+      public IResult DeleteHardware(Guid hardwareId)
       {
          var resultModel = new Result();
-         if (!HardWareList.Remove(hardware_ID))
+         if (!HardWareList.Remove(hardwareId))
          {
             resultModel.HasError = true;
             resultModel.ErrorMessage = "Entfernen Fehlgeschlagen";

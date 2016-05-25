@@ -12,7 +12,7 @@ namespace ProcessHardwareLocations
       IResult LoadHardware(string filepath);
       IResult UpdateHardware(Hardware updatedHardware);
       IResult SaveHardware(string filepath);
-      IResult DeleteHardware(Guid hardware_ID);
+      IResult DeleteHardware(Guid hardwareId);
       List<string> GetBuildings();
       List<string> GetRooms();
    }

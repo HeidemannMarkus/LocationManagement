@@ -22,7 +22,7 @@ namespace GUI
             TBName.Focus();
             DatePicker.SelectedDate = DateTime.Today;
 
-            initCB();
+            InitCb();
 
             listViewHardware.ItemsSource = this._hardwareList;
             _processHardware = new ProcessHardwareLocations.ProcessHardwareLocations();
@@ -42,7 +42,7 @@ namespace GUI
                         DateOfFirstUsage = DatePicker.SelectedDate,
                         Id = _selected.Id
                     };
-                    hasError(_processHardware.UpdateHardware(temp));
+                    HasError(_processHardware.UpdateHardware(temp));
                 }
                 else
                 {
@@ -56,7 +56,7 @@ namespace GUI
         {
             if (_selected != null)
             {
-                hasError(_processHardware.DeleteHardware(_selected.Id));
+                HasError(_processHardware.DeleteHardware(_selected.Id));
             }
             else
             {
@@ -78,7 +78,7 @@ namespace GUI
                     DateOfFirstUsage = DatePicker.SelectedDate
                 };
 
-                if (!hasError(_processHardware.CaptureHardware(temp)))
+                if (!HasError(_processHardware.CaptureHardware(temp)))
                 {
                     TBName.Clear();
                     TBArt.Clear();
@@ -87,7 +87,7 @@ namespace GUI
                     DatePicker.SelectedDate = DateTime.Today;
                 }
             }
-            updateListView();
+            UpdateListView();
             TBName.Focus();
         }
 
@@ -97,7 +97,7 @@ namespace GUI
             sfd.Filter = "Loading files (*.json*;*.xml;*.dat)| *.json; *.xml; *.dat";
             if (sfd.ShowDialog() == true)
             {
-                if (!hasError(_processHardware.SaveHardware(sfd.FileName)))
+                if (!HasError(_processHardware.SaveHardware(sfd.FileName)))
                 {
                     MessageBox.Show("Die Daten wurden erfolgreich exportiert.", "Export", MessageBoxButton.OK);
                 }
@@ -111,7 +111,7 @@ namespace GUI
             ofd.Filter = "Loading files (*.dat;*.xml;*.csv;*.json)| *.dat; *.xml; *.csv; *.json";
             if (ofd.ShowDialog() == true)
             {
-                if (!hasError(_processHardware.LoadHardware(ofd.FileName)))
+                if (!HasError(_processHardware.LoadHardware(ofd.FileName)))
                 {
                     MessageBox.Show("Die Daten wurden erfolgreich importiert.", "Import", MessageBoxButton.OK);
                 }
@@ -119,7 +119,7 @@ namespace GUI
             TBName.Focus();
         }
 
-        private void listViewHardware_SelectionChanged_1(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        private void listViewHardware_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             _selected = (Hardware) listViewHardware.SelectedItem;
             if (_selected != null)
@@ -132,9 +132,9 @@ namespace GUI
             }
         }
         
-        private void updateListView()
+        private void UpdateListView()
         {
-            initCB();
+            InitCb();
             
             foreach (string room in _processHardware.GetRooms())
             {
@@ -167,10 +167,10 @@ namespace GUI
 
         private void BtnResetFilter_Click(object sender, RoutedEventArgs e)
         {
-            updateListView();
+            UpdateListView();
         }
 
-        private bool hasError(IResult iresult)
+        private bool HasError(IResult iresult)
         {
             if (iresult.HasError)
             {
@@ -179,7 +179,7 @@ namespace GUI
             }
             else
             {
-                updateListView();
+                UpdateListView();
                 return false;
             }
            
@@ -198,7 +198,7 @@ namespace GUI
             }
         }
 
-        private void initCB()
+        private void InitCb()
         {
             CBbuilding.Items.Clear();
             CBroom.Items.Clear();

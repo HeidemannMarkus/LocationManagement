@@ -27,7 +27,7 @@
                 <Label Content="Art" Height="29" HorizontalAlignment="Left" Margin="10,39,0,0" Name="label6" VerticalAlignment="Top" Width="77" />
             </Grid>
         </GroupBox>
-        <ListView Height="300" HorizontalAlignment="Left" Margin="383,12,0,0" Name="listViewHardware" VerticalAlignment="Top" Width="372" SelectionChanged="listViewHardware_SelectionChanged_1" SelectionMode="Single">
+        <ListView Height="300" HorizontalAlignment="Left" Margin="383,12,0,0" Name="listViewHardware" VerticalAlignment="Top" Width="372" SelectionChanged="listViewHardware_SelectionChanged" SelectionMode="Single">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Name" Width="55" DisplayMemberBinding="{Binding Path=HardwareName}"/>
