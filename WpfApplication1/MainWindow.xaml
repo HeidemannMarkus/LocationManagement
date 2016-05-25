@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApplication1"
         mc:Ignorable="d"
-        Title="Hardwareerfassung" Height="468" Width="792.667" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+        Title="Hardwareerfassung" Height="489" Width="792.667" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid Height="430" Margin="10,6,10,5">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -27,7 +27,7 @@
                 <Label Content="Art" Height="29" HorizontalAlignment="Left" Margin="10,39,0,0" Name="label6" VerticalAlignment="Top" Width="77" />
             </Grid>
         </GroupBox>
-        <ListView Height="288" HorizontalAlignment="Left" Margin="383,24,0,0" Name="listViewHardware" VerticalAlignment="Top" Width="372" SelectionChanged="listViewHardware_SelectionChanged_1">
+        <ListView Height="300" HorizontalAlignment="Left" Margin="383,12,0,0" Name="listViewHardware" VerticalAlignment="Top" Width="372" SelectionChanged="listViewHardware_SelectionChanged_1" SelectionMode="Single">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Name" Width="55" DisplayMemberBinding="{Binding Path=HardwareName}"/>
