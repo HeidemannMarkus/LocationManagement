@@ -1,9 +1,9 @@
-﻿<Window x:Class="WpfApplication1.MainWindow"
+﻿<Window x:Class="GUI.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WpfApplication1"
+        xmlns:local="clr-namespace:GUI"
         mc:Ignorable="d"
         Title="Hardwareerfassung" Height="489" Width="792.667" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid Height="430" Margin="10,6,10,5">

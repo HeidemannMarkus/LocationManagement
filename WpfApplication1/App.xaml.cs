@@ -5,7 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Windows;
 
-namespace WpfApplication1
+namespace GUI
 {
    /// <summary>
    /// Interaction logic for App.xaml

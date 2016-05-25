@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows;
 
-namespace WpfApplication1
+namespace GUI
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
