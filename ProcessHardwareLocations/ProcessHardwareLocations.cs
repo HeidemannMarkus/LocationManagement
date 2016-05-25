@@ -106,16 +106,17 @@ namespace ProcessHardwareLocations
        public IResult SaveHardware(string filepath)
        {
             var resultModel = new Result();
+          List<Hardware> listToWrite = HardWareList.Values.ToList();
             switch (Path.GetExtension(filepath))
             {
                 case ".dat":
-                    new BinaryParser().ToFile(filepath, HardWareList);
+                    new BinaryParser().ToFile(filepath, listToWrite);
                     break;
                 case ".xml":
-                    new XmlParser().ToFile(filepath, HardWareList);
+                    new XmlParser().ToFile(filepath, listToWrite);
                     break;
                 case ".json":
-                    new JsonParser().ToFile(filepath, HardWareList);
+                    new JsonParser().ToFile(filepath, listToWrite);
                     break;
                 /*case ".csv":
                     new CsvParser().ToFile(filepath, HardWareList.ToList());
